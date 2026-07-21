@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Costia — 建築板金業のための現場・原価管理システム</title>
+<meta name="description" content="現場ごとの原価と粗利が、日々の入力だけで見える。建築板金業向けの現場・原価管理システム Costia。月額1,500円(税別)、30日間の無料お試し。">
+<link rel="icon" href="assets/costia-mark.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Costia — 建築板金業のための現場・原価管理システム">
+<meta property="og:description" content="現場ごとの原価と粗利が、日々の入力だけで見える。月額1,500円(税別)、30日間の無料お試し。">
+<meta property="og:image" content="assets/costia-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #6b6b6b;
+  --border: #e6e6e6;
+  --card: #fafafa;
+  --accent: #1a1a1a;
+  --accent-fg: #ffffff;
+  --radius: 12px;
+  --maxw: 1080px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0d0d;
+    --fg: #f5f5f5;
+    --muted: #a0a0a0;
+    --border: #262626;
+    --card: #161616;
+    --accent: #f5f5f5;
+    --accent-fg: #0d0d0d;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+/* header */
+header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav { display: flex; align-items: center; gap: 24px; height: 64px; }
+.nav .spacer { flex: 1; }
+
+/* ロゴは濃紺の文字が入っており、ダークで沈む。マーク画像 + CSS文字で組む。 */
+.logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+/* マークの背景は白の不透明。ダークでは白い四角が浮くので角丸のタイルとして見せる。 */
+.logo img { height: 30px; width: auto; border-radius: 6px; }
+.logo span { font-size: 21px; font-weight: 800; letter-spacing: -.02em; }
+.nav a.link { font-size: 14px; color: var(--muted); text-decoration: none; }
+.nav a.link:hover { color: var(--fg); }
+@media (max-width: 640px) { .nav a.link { display: none; } }
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  white-space: nowrap;
+}
+.btn:hover { opacity: .85; }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--border); }
+
+/* hero */
+.hero { padding: 88px 0 72px; text-align: center; }
+.hero h1 {
+  font-size: clamp(30px, 5.5vw, 52px);
+  line-height: 1.3;
+  letter-spacing: -.02em;
+  margin: 0 0 20px;
+  font-weight: 800;
+}
+.hero p.lead {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+.cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero .note { margin-top: 18px; font-size: 13px; color: var(--muted); }
+
+/* ヘッダーが sticky なので、アンカー移動で見出しが隠れないよう逃がす。 */
+section { padding: 72px 0; border-top: 1px solid var(--border); scroll-margin-top: 64px; }
+h2 {
+  font-size: clamp(22px, 3.4vw, 30px);
+  letter-spacing: -.01em;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+.section-lead { color: var(--muted); margin: 0 0 40px; font-size: 15px; }
+
+.grid { display: grid; gap: 20px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 820px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.card h3 { margin: 0 0 8px; font-size: 16px; font-weight: 700; }
+.card p { margin: 0; font-size: 14px; color: var(--muted); }
+
+/* features */
+ul.features { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 32px; }
+@media (max-width: 820px) { ul.features { grid-template-columns: 1fr; } }
+ul.features li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+ul.features li::before {
+  content: "";
+  flex: none;
+  margin-top: 9px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--fg);
+}
+
+/* pricing */
+.price-card { max-width: 520px; margin: 0 auto; text-align: center; }
+.price-amount { font-size: 46px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+.price-amount span { font-size: 15px; font-weight: 500; color: var(--muted); margin-left: 6px; }
+.price-sub { font-size: 14px; color: var(--muted); margin: 8px 0 24px; }
+.price-list { list-style: none; padding: 0; margin: 24px 0 0; text-align: left; font-size: 14px; color: var(--muted); }
+.price-list li { padding: 8px 0; border-top: 1px solid var(--border); }
+
+/* faq */
+details {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 0;
+}
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: "+"; color: var(--muted); font-weight: 400; }
+details[open] summary::after { content: "−"; }
+details p { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+
+/* footer */
+footer { border-top: 1px solid var(--border); padding: 48px 0; font-size: 13px; color: var(--muted); }
+footer .cols { display: flex; gap: 40px; flex-wrap: wrap; justify-content: space-between; }
+footer a { text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+footer .copy { margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><img src="assets/costia-mark.png" alt=""><span>Costia</span></a>
+    <div class="spacer"></div>
+    <a class="link" href="#features">機能</a>
+    <a class="link" href="#pricing">料金</a>
+    <a class="link" href="#faq">よくある質問</a>
+    <a class="btn" href="https://costia-next.vercel.app/signup">無料ではじめる</a>
+  </div>
+</header>
+
+<main>
+
+<div class="wrap hero">
+  <h1>現場ごとの粗利が、<br>日々の入力だけで見える。</h1>
+  <p class="lead">
+    Costia は建築板金業のための現場・原価管理システムです。
+    日報・仕入・経費をその場で入力すると、現場ごとの原価と粗利が自動で積み上がります。
+  </p>
+  <div class="cta-row">
+    <a class="btn" href="https://costia-next.vercel.app/signup">30日間 無料ではじめる</a>
+    <a class="btn ghost" href="#features">機能を見る</a>
+  </div>
+  <p class="note">クレジットカードの登録は不要です。お試し期間が終わっても自動で課金されることはありません。</p>
+</div>
+
+<section id="problem">
+  <div class="wrap">
+    <h2>「終わってみないと儲けが分からない」を、なくす。</h2>
+    <p class="section-lead">板金の現場でよく起きる、原価が見えなくなる3つの理由に正面から対応しました。</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>材料費が現場に紐づかない</h3>
+        <p>仕入れた材料を、どの現場でどれだけ使ったかを記録。使用と同時に原価計上と在庫の減算が行われます。</p>
+      </div>
+      <div class="card">
+        <h3>労務費が後回しになる</h3>
+        <p>職人が入力した日報の作業時間から、設定した単価で労務費を自動計上。日報がそのまま原価になります。</p>
+      </div>
+      <div class="card">
+        <h3>請求書の入力が追いつかない</h3>
+        <p>仕入先の請求書PDFをアップロードすると、AIが明細を読み取って取り込みます。手打ちの手間を減らせます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <h2>できること</h2>
+    <p class="section-lead">プランは1つだけ。以下の機能をすべてお使いいただけます。</p>
+    <ul class="features">
+      <li>現場ごとの原価・粗利の集計</li>
+      <li>日報からの労務費計上</li>
+      <li>材料の仕入・使用・在庫管理</li>
+      <li>請求書PDFのAI読み取り</li>
+      <li>Telegram から現場で経費入力</li>
+      <li>職人向けの日報入力画面</li>
+      <li>損益サマリーとグラフ</li>
+      <li>自社データのエクスポート</li>
+    </ul>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <h2>事務所と現場、それぞれの画面</h2>
+    <p class="section-lead">立場によって見える画面を分けているので、職人に余計な操作を覚えてもらう必要がありません。</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>事務・管理者</h3>
+        <p>現場の登録から、材料の仕入・使用、経費、請求、損益の確認まで。会社全体の数字を1画面で追えます。</p>
+      </div>
+      <div class="card">
+        <h3>職人</h3>
+        <p>スマホで開くのは日報の入力画面だけ。現場と作業時間を選んで送るだけで、労務費として反映されます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2>料金</h2>
+    <p class="section-lead">1社あたりの料金です。人数による追加料金はありません。</p>
+    <div class="card price-card">
+      <p style="margin:0;font-size:14px;font-weight:600;">Costia 月額プラン</p>
+      <div class="price-amount">1,500<span>円(税別) / 月</span></div>
+      <p class="price-sub">税込 1,650円(消費税10%)</p>
+      <a class="btn" href="https://costia-next.vercel.app/signup">30日間 無料ではじめる</a>
+      <ul class="price-list">
+        <li>30日間の無料お試し・カード登録は不要</li>
+        <li>お試し後の自動課金なし。手続きをしない限り料金は発生しません</li>
+        <li>お支払いは Stripe によるクレジットカード決済</li>
+        <li>解約はサービス内からいつでも。違約金はかかりません</li>
+      </ul>
+    </div>
+    <p style="text-align:center;margin-top:20px;font-size:13px;">
+      <a href="https://costia-next.vercel.app/pricing">料金の詳細を見る</a>
+    </p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div style="margin-top:32px;">
+      <details>
+        <summary>お試し期間が終わると自動的に課金されますか？</summary>
+        <p>いいえ。お申し込み手続きを行わない限り料金は発生しません。期間終了後はお申し込み画面が表示され、手続きをすると引き続きご利用いただけます。</p>
+      </details>
+      <details>
+        <summary>クレジットカード情報は安全ですか？</summary>
+        <p>決済は Stripe 社の決済ページで行われ、カード情報を当社が保持することはありません。</p>
+      </details>
+      <details>
+        <summary>解約したいときはどうすればいいですか？</summary>
+        <p>サービス内の「契約・お支払い」画面から、いつでもご自身で解約できます。解約後も当該請求期間の末日までご利用いただけます。なお、お支払い済みの料金の返金・日割精算は行っておりません。</p>
+      </details>
+      <details>
+        <summary>入力したデータは持ち出せますか？</summary>
+        <p>はい。エクスポート機能でご自身のデータを取得していただけます。解約前にも実行できます。</p>
+      </details>
+      <details>
+        <summary>AI解析の利用に上限はありますか？</summary>
+        <p>費用が急増しないよう上限を設けていますが、通常のご利用で到達する値ではありません。請求書PDFのAI解析は1社あたり月300回(同一の請求書につき5回まで)、PDFは1ファイルあたり50ページまでです。</p>
+      </details>
+      <details>
+        <summary>スマホでも使えますか？</summary>
+        <p>はい。職人向けの日報入力画面はスマホでの利用を前提に作られています。経費の入力は Telegram からも行えます。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="wrap" style="text-align:center;">
+    <h2>まずは30日間、無料で。</h2>
+    <p class="section-lead">クレジットカードの登録は不要です。</p>
+    <a class="btn" href="https://costia-next.vercel.app/signup">無料ではじめる</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo" style="margin-bottom:10px;"><img src="assets/costia-mark.png" alt=""><span>Costia</span></div>
+        <div>建築板金業向け 現場・原価管理システム</div>
+      </div>
+      <nav>
+        <a href="https://costia-next.vercel.app/pricing">料金</a>
+        <a href="https://costia-next.vercel.app/legal/terms">利用規約</a>
+        <a href="https://costia-next.vercel.app/legal/privacy">プライバシーポリシー</a>
+        <a href="https://costia-next.vercel.app/legal/tokushoho">特定商取引法に基づく表記</a>
+        <a href="mailto:team.costia@gmail.com">お問い合わせ</a>
+      </nav>
+    </div>
+    <div class="copy">
+      株式会社高阪鈑金工業 ／ 滋賀県大津市坂本3丁目9番3号<br>
+      &copy; 2026 株式会社高阪鈑金工業
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
