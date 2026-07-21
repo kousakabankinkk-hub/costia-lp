@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Costia — 建築板金業のための現場・原価管理システム</title>
 <meta name="description" content="現場ごとの原価と粗利が、日々の入力だけで見える。建築板金業向けの現場・原価管理システム Costia。月額1,500円(税別)、30日間の無料お試し。">
+<!-- 検索結果に出さない。URLを知っている人だけに見せる運用。
+     アプリ側(costia-next)の robots.txt が Disallow: / のため、それに合わせている。
+     一般公開に踏み切るときはこの行を消し、アプリ側の robots.txt も併せて見直すこと。
+     ※ robots.txt での Disallow は併用しないこと。クロール自体を止めると
+       クローラーがこの noindex を読めず、かえって検索結果に残る場合がある。 -->
+<meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="assets/costia-mark.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Costia — 建築板金業のための現場・原価管理システム">
