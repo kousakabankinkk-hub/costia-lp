@@ -175,6 +175,15 @@ details summary::-webkit-details-marker { display: none; }
 details summary::after { content: "+"; color: var(--muted); font-weight: 400; }
 details[open] summary::after { content: "−"; }
 details p { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+details p a { color: var(--fg); }
+.faq-group { margin-top: 36px; }
+.faq-group h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
 
 /* footer */
 footer { border-top: 1px solid var(--border); padding: 48px 0; font-size: 13px; color: var(--muted); }
@@ -294,22 +303,42 @@ footer .copy { margin-top: 32px; }
 <section id="faq">
   <div class="wrap">
     <h2>よくある質問</h2>
-    <div style="margin-top:32px;">
+    <div class="faq-group">
+      <h3>データの取り扱いについて</h3>
       <details>
-        <summary>お試し期間が終わると自動的に課金されますか？</summary>
-        <p>いいえ。お申し込み手続きを行わない限り料金は発生しません。期間終了後はお申し込み画面が表示され、手続きをすると引き続きご利用いただけます。</p>
+        <summary>入力したデータを運営者に見られることはありませんか？</summary>
+        <p>お問い合わせへの対応、障害の調査・復旧、不正利用の調査、法令に基づく要請といった必要な場合を除き、運営者がお客様の業務データを閲覧することはありません。営業や分析の目的で閲覧することは一切ありません。詳しくは<a href="https://costia-next.vercel.app/legal/privacy">プライバシーポリシー</a>をご覧ください。</p>
+      </details>
+      <details>
+        <summary>他の会社に自社のデータが見えることはありませんか？</summary>
+        <p>ありません。データは会社アカウント単位で分離されており、他社の利用者が閲覧することはできない仕組みになっています。</p>
+      </details>
+      <details>
+        <summary>データはどこに保管されますか？</summary>
+        <p>業務データは日本国内(東京リージョン)のデータベースに保管され、通信はすべて暗号化されています。アップロードされた請求書PDFなどのファイルは、会社ごとに分離された保管領域に保存されます。詳しくは<a href="https://costia-next.vercel.app/legal/privacy">プライバシーポリシー</a>をご覧ください。</p>
+      </details>
+      <details>
+        <summary>AIに読み取らせた請求書の内容が、AIの学習に使われることはありませんか？</summary>
+        <p>ありません。請求書PDFの解析には Google の Gemini API(有料版)を利用しており、Google が定めるところにより、送信されたデータが Google の生成AIモデルの学習・改善に利用されることはありません。</p>
       </details>
       <details>
         <summary>クレジットカード情報は安全ですか？</summary>
         <p>決済は Stripe 社の決済ページで行われ、カード情報を当社が保持することはありません。</p>
       </details>
       <details>
-        <summary>解約したいときはどうすればいいですか？</summary>
-        <p>サービス内の「契約・お支払い」画面から、いつでもご自身で解約できます。解約後も当該請求期間の末日までご利用いただけます。なお、お支払い済みの料金の返金・日割精算は行っておりません。</p>
-      </details>
-      <details>
         <summary>入力したデータは持ち出せますか？</summary>
         <p>はい。エクスポート機能でご自身のデータを取得していただけます。解約前にも実行できます。</p>
+      </details>
+    </div>
+    <div class="faq-group">
+      <h3>料金・ご利用について</h3>
+      <details>
+        <summary>お試し期間が終わると自動的に課金されますか？</summary>
+        <p>いいえ。お申し込み手続きを行わない限り料金は発生しません。期間終了後はお申し込み画面が表示され、手続きをすると引き続きご利用いただけます。</p>
+      </details>
+      <details>
+        <summary>解約したいときはどうすればいいですか？</summary>
+        <p>サービス内の「契約・お支払い」画面から、いつでもご自身で解約できます。解約後も当該請求期間の末日までご利用いただけます。なお、お支払い済みの料金の返金・日割精算は行っておりません。</p>
       </details>
       <details>
         <summary>AI解析の利用に上限はありますか？</summary>
