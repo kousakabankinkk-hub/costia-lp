@@ -1,14 +1,28 @@
 # costia-lp
 
-建築板金業向け 現場・原価管理システム **Costia** のランディングページ。
+建設業向け 現場・原価管理システム **Costia** のランディングページ。
 
 静的な `index.html` 1枚のみ。ビルド不要で、GitHub Pages からそのまま配信します。
 
 ## 構成
 
 - `index.html` — LP本体(CSSはインライン)
-- `assets/` — ロゴ画像
+- `assets/` — ロゴと画面キャプチャ
 - `.nojekyll` — GitHub Pages の Jekyll 処理を無効化
+
+### 画面キャプチャについて
+
+`assets/screen-*.png` はデモ会社(サンプルデータ)の画面です。実在の会社・取引先・
+金額は含みません。撮り直すときは costia-next 側の `docs/demo/` に元があります
+(`scripts/seed-demo*.ts` でデモデータを作り、`docs/demo/in-person-demo.md` の
+手順で撮影しています)。
+
+差し替えるときの注意:
+
+- **ライトモードで撮る**。ダーク表示でも浮かないよう白い枠で包む作りにしてある
+- **ヘッダーのメールアドレスを消す**。ログイン中のアドレスがそのまま写る
+- `index.html` の `width` / `height` 属性を実寸に合わせる。ずれると読み込み時に
+  レイアウトががたつく
 
 ## ローカルで確認する
 
@@ -18,6 +32,52 @@
 
 GitHub の Settings → Pages で、Source を `main` ブランチのルートに設定します。
 
+現在の公開URL: https://kousakabankinkk-hub.github.io/costia-lp/
+
+**このURLにはGitHubアカウント名(社名)が含まれます。** 一般公開に踏み切ったので、
+下記のカスタムドメインへの移行を推奨します。
+
+## カスタムドメインへの移行(未実施)
+
+`teamcostia.com` は現在メール専用(MX が Google Workspace)で、Web のレコード
+(A / CNAME)は1つもありません。そのため下記を追加してもメールには影響しません。
+
+**順番を守ること。** `CNAME` ファイルを先に置くと、GitHub Pages が github.io の
+URL をカスタムドメインへリダイレクトし始めるため、DNS が引けるようになるまで
+LP が見られなくなります。XServer の DNS 反映には1時間ほどかかります。
+
+1. XServer のDNSレコード設定で、`teamcostia.com` に次を追加する
+
+   | 種別 | ホスト名 | 値 |
+   |---|---|---|
+   | A | (空欄=apex) | 185.199.108.153 |
+   | A | (空欄=apex) | 185.199.109.153 |
+   | A | (空欄=apex) | 185.199.110.153 |
+   | A | (空欄=apex) | 185.199.111.153 |
+   | CNAME | www | kousakabankinkk-hub.github.io. |
+
+   MX レコードは触らないこと(メールが止まります)。
+
+2. 反映を確認する。4つのIPが返れば完了
+
+   ```
+   nslookup -type=A teamcostia.com 8.8.8.8
+   ```
+
+3. このリポジトリのルートに `CNAME` ファイルを作り、1行だけ書いて push する
+
+   ```
+   teamcostia.com
+   ```
+
+4. GitHub の Settings → Pages で **Enforce HTTPS** を有効にする
+   (証明書の発行に数分かかるため、すぐ有効化できないときは少し待つ)
+
+5. 移行後、この README の公開URLと、名刺・チラシの記載を更新する
+
+なお、アプリ本体(costia-next)のリンク先は Vercel のままで問題ありません。
+LP とアプリでドメインを揃えたい場合は別途検討します。
+
 ## リンク先
 
 アプリ本体は Vercel 上の https://costia-next.vercel.app で稼働しています。
@@ -25,15 +85,13 @@ LP からのリンク(サインアップ・料金・規約類)はすべてそち
 
 ## 検索避けについて
 
-`index.html` に `<meta name="robots" content="noindex, nofollow">` を入れています。
-URL を知っている人だけに見せる運用のためで、アプリ側 (costia-next) の
-`robots.txt` が `Disallow: /` であることに合わせています。
+**2026年8月時点で noindex は解除済み**です(集客開始に伴う一般公開)。
+`index.html` に `robots` の meta は入っていません。
 
-一般公開に踏み切るときは、この meta を消し、アプリ側の `robots.txt` も
-併せて見直してください。片方だけ変えると意図と食い違います。
-
-なお `robots.txt` での `Disallow` は併用しないでください。クロール自体を止めると
-クローラーが noindex を読めず、かえって検索結果に URL が残ることがあります。
+再び非公開に戻す場合は `<meta name="robots" content="noindex, nofollow">` を
+head に入れます。その際 `robots.txt` での `Disallow` は併用しないでください。
+クロール自体を止めるとクローラーが noindex を読めず、かえって検索結果に
+URL が残ることがあります。
 
 ## 表記の更新について
 
