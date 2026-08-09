@@ -136,6 +136,25 @@ h2 {
 .card h3 { margin: 0 0 8px; font-size: 16px; font-weight: 700; }
 .card p { margin: 0; font-size: 14px; color: var(--muted); }
 
+/* screens — 実際の画面。画面写真はライトモードで撮ってあるため、ダーク背景でも
+   浮かないよう白い枠で包む。スマホ幅では文字まで読めないので、拡大できるように
+   原寸へのリンクにしてある(説明は見出しと本文が担う)。 */
+.shot { margin: 0 0 44px; }
+.shot:last-child { margin-bottom: 0; }
+.shot h3 { margin: 0 0 6px; font-size: 18px; font-weight: 700; }
+.shot > p { margin: 0 0 16px; font-size: 14px; color: var(--muted); max-width: 720px; }
+.shot figure { margin: 0; }
+.shot .frame {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #ffffff;
+  line-height: 0;
+}
+.shot .frame img { width: 100%; height: auto; }
+.shot figcaption { margin-top: 10px; font-size: 12px; color: var(--muted); }
+
 /* features */
 ul.features { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 32px; }
 @media (max-width: 820px) { ul.features { grid-template-columns: 1fr; } }
@@ -200,6 +219,7 @@ footer .copy { margin-top: 32px; }
   <div class="wrap nav">
     <a class="logo" href="#"><img class="logo-mark" src="assets/costia-mark-t.png" alt=""><img class="logo-word light-only" src="assets/costia-wordmark.png" alt="Costia"><img class="logo-word dark-only" src="assets/costia-wordmark-light.png" alt="Costia"></a>
     <div class="spacer"></div>
+    <a class="link" href="#screens">画面</a>
     <a class="link" href="#features">機能</a>
     <a class="link" href="#pricing">料金</a>
     <a class="link" href="#faq">よくある質問</a>
@@ -218,7 +238,7 @@ footer .copy { margin-top: 32px; }
   </p>
   <div class="cta-row">
     <a class="btn" href="https://costia-next.vercel.app/signup">30日間 無料ではじめる</a>
-    <a class="btn ghost" href="#features">機能を見る</a>
+    <a class="btn ghost" href="#screens">画面を見る</a>
   </div>
   <p class="note">クレジットカードの登録は不要です。お試し期間が終わっても自動で課金されることはありません。</p>
 </div>
@@ -240,6 +260,58 @@ footer .copy { margin-top: 32px; }
         <h3>請求書の入力が追いつかない</h3>
         <p>仕入先の請求書PDFをアップロードすると、AIが明細を読み取って取り込みます。手打ちの手間を減らせます。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <h2>実際の画面</h2>
+    <p class="section-lead">サンプルの会社のデータで表示しています。画像を開くと拡大できます。</p>
+
+    <div class="shot">
+      <h3>請求書のPDFを入れるだけ</h3>
+      <p>
+        仕入先から届いた請求書のPDFをアップロードすると、AIが明細を1行ずつ読み取ります。
+        請求書に書かれた工事コードから、どの現場の材料かまで自動で割り当てます。
+        読み取った合計が請求書と合っているかも、その場で確認できます。
+      </p>
+      <figure>
+        <a class="frame" href="assets/screen-invoice-parse.png" target="_blank" rel="noopener">
+          <img src="assets/screen-invoice-parse.png" alt="請求書PDFの読み取り結果。品名・数量・単価・金額と、割り当てられた現場が一覧で表示されている画面" loading="lazy" width="1920" height="1032">
+        </a>
+        <figcaption>読み取った明細に、工事コードと現場が自動で割り当てられます。</figcaption>
+      </figure>
+    </div>
+
+    <div class="shot">
+      <h3>現場ごとの原価と粗利</h3>
+      <p>
+        受注金額に対して、労務費・材料費・経費がいくら乗っているか。
+        工事が終わってから集計するのではなく、進んでいる最中に確認できます。
+        赤字になっている現場は赤く表示されるので、手を打つ前に気づけます。
+      </p>
+      <figure>
+        <a class="frame" href="assets/screen-site-ledger.png" target="_blank" rel="noopener">
+          <img src="assets/screen-site-ledger.png" alt="工事台帳。工事ごとに受注金額・労務費・材料費・経費・粗利・粗利率が並び、赤字の現場が赤字で表示されている画面" loading="lazy" width="1920" height="911">
+        </a>
+        <figcaption>進行中も完了も、同じ画面で粗利を追えます。</figcaption>
+      </figure>
+    </div>
+
+    <div class="shot">
+      <h3>材料の値上がりが数字で残る</h3>
+      <p>
+        取り込んだ請求書から、材料ごとの単価が仕入先別に貯まっていきます。
+        いつ、どれだけ上がったのかが記録として残るので、
+        見積もりの見直しや仕入先との価格の話を、勘ではなく数字でできます。
+      </p>
+      <figure>
+        <a class="frame" href="assets/screen-price-trend.png" target="_blank" rel="noopener">
+          <img src="assets/screen-price-trend.png" alt="材料の単価推移グラフ。仕入先ごとに色分けされた折れ線で、数年分の価格の動きが表示されている画面" loading="lazy" width="1920" height="1032">
+        </a>
+        <figcaption>仕入先ごとに色を分けて表示。最安の仕入先も一目で分かります。</figcaption>
+      </figure>
     </div>
   </div>
 </section>
