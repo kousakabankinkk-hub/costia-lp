@@ -155,6 +155,26 @@ h2 {
   vertical-align: 2px;
 }
 
+/* オプションカード内の要点。features と同じ丸マーカーで揃える */
+.opt-points { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 10px; }
+.opt-points li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.opt-points li::before {
+  content: "";
+  flex: none;
+  margin-top: 9px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--fg);
+}
+.opt-points strong { color: var(--fg); font-weight: 600; }
+
 /* 導入の流れ。番号は丸で大きく見せる */
 .step-num {
   display: inline-flex;
@@ -382,6 +402,11 @@ footer .copy { margin-top: 32px; }
           御社自身の Google Drive の現場フォルダに仕分けされて入ります。
           いまお使いの Drive のフォルダ構成のまま使えます。
         </p>
+        <ul class="opt-points">
+          <li><strong>まとめて送っても操作は1回。</strong>10枚まとめて送っても、行き先を聞かれるのは1回だけ。ボタンを押せば全部まとめて同じ現場のフォルダへ入ります。</li>
+          <li><strong>飛び込みの現場も、その場から。</strong>まだ登録していない現場でも、現場から「新しい案件を作る」を押して名前を送るだけ。保存先のフォルダまで自動でできます。事務所に電話して先に登録してもらう必要はありません。</li>
+          <li><strong>見積り段階から使えます。</strong>受注が決まったら、それまでの写真・書類・連絡メモごと工事に引き継げます。</li>
+        </ul>
       </div>
       <div class="card">
         <h3>会計連携 <span class="opt-tag">準備中</span></h3>
@@ -533,7 +558,7 @@ footer .copy { margin-top: 32px; }
       </details>
       <details>
         <summary>現場の写真も管理できますか？</summary>
-        <p>本体は原価の管理に絞っていますが、オプションの「案件連携」で、チャット(Telegram)の現場ごとの話題に送った写真・書類・連絡メモを、御社自身の Google Drive の現場フォルダへ自動で仕分けできます。写真の実体は御社の Drive に入るので、容量課金や囲い込みはありません。</p>
+        <p>本体は原価の管理に絞っていますが、オプションの「案件連携」で、チャット(Telegram)の現場ごとの話題に送った写真・書類・連絡メモを、御社自身の Google Drive の現場フォルダへ自動で仕分けできます。まとめて送った写真は1回の操作で振り分けられ、まだ登録していない飛び込みの現場も、現場から名前を送るだけでフォルダごと作れます。写真の実体は御社の Drive に入るので、容量課金や囲い込みはありません。</p>
       </details>
       <details>
         <summary>会計ソフトと連携できますか？</summary>
