@@ -93,7 +93,7 @@ LP とアプリでドメインを揃えたい場合は別途検討します。
 
 ## リンク先
 
-アプリ本体は Vercel 上の https://costia-next.vercel.app で稼働しています。
+アプリ本体は Vercel 上の https://app.teamcostia.com で稼働しています。
 LP からのリンク(サインアップ・料金・規約類)はすべてそちらを指しています。
 
 ## 検索避けについて(現在 noindex・一時的)
