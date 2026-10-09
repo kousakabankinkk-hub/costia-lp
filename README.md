@@ -24,6 +24,18 @@
 - `index.html` の `width` / `height` 属性を実寸に合わせる。ずれると読み込み時に
   レイアウトががたつく
 
+2026-10-09 に4枚とも撮り直した(デモ建装株式会社 #10・標準版)。どれも 1920×1032。
+
+| ファイル | 画面 | 撮り方 |
+|---|---|---|
+| `screen-invoice-parse.png` | `/invoices/12`(東邦建材・確認待ち) | 幅1920・等倍。1280幅だと年・月・日の欄が縦に積まれて見づらい |
+| `screen-site-ledger.png` | `/sites?status=in_progress` | 幅1920・等倍。全件だと赤字の岡田様邸が画面外に出るので進行中に絞る |
+| `screen-price-trend.png` | `/materials?materialId=8430#detail`(唐草 ガルバ 1820mm) | 幅1280・1.5倍(グラフの文字を読めるように) |
+| `screen-schedule.png` | `/schedule`(週ごと) | 幅1920・等倍。10/9〜10/15 の予定15件を撮影用に入れてある。日付が過ぎると空になるので、撮り直すときは予定を入れ直す |
+
+請求書 #12 は確定していない(粗利に乗っていない)。対面デモの前には costia-next の
+`scripts/reset-demo-invoices.ts` で消すこと。
+
 ### 追加予定のキャプチャ(未撮影)
 
 `index.html` にはコメントアウトした `<div class="shot">` を置いてある。撮影して
